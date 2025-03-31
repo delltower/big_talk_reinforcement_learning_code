@@ -83,25 +83,11 @@ class GridWorldBase:
             print(" ".join(f"{arrow:^3}" for arrow in row))
 
 class GridWorld(GridWorldBase):
-    #有边界
+    #没有边界检测、禁止区域和随机奖励
     def __init__(self, rows=3, cols=3, terminal_states=None, gamma=0.9):
         super().__init__(rows, cols, terminal_states, gamma)
 
     def get_reward(self, state, next_state, action):
-        #奖励函数 边界惩罚
-        i, j = state
-        """
-        # 检查是否触碰边界
-        is_boundary_hit = False
-        if action == 'up' and i == 0:  # 向上触碰上边界
-            is_boundary_hit = True
-        elif action == 'down' and i == self.rows - 1:  # 向下触碰下边界
-            is_boundary_hit = True
-        elif action == 'left' and j == 0:  # 向左触碰左边界
-            is_boundary_hit = True
-        elif action == 'right' and j == self.cols - 1:  # 向右触碰右边界
-            is_boundary_hit = True
-        """
         # 计算奖励
         if next_state in self.terminal_states:
             return 1  # 到达终止状态
@@ -109,7 +95,7 @@ class GridWorld(GridWorldBase):
             return 0  # 其他情况
 
 class GridWorldV3(GridWorldBase):
-    #增加禁止区域和边界惩罚和随机性奖励
+    #增加禁止区域和边界惩罚
     def __init__(self, rows=3, cols=3, terminal_states=None, forbid_states=None, gamma=0.9, randomness=0.1):
         super().__init__(rows, cols, terminal_states, forbid_states, gamma)
         self.randomness = randomness  # 随机性概率
