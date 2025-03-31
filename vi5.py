@@ -128,4 +128,4 @@ if __name__ == "__main__":
  [ 8.1 ,  9. ,  10. ,   9.  ,  8.1 ]])
     visualStateValue(state, policy, terminal_states={(3, 2)}, forbid_states = {(1,1),(1,2),(2,2),(3,1),(3,3),(4,1)})
     """
-    visualGrid(5,5, terminal_states={(3, 2)})
+    visualGrid(5,5, terminal_states={(3, 2)}, forbid_states = {(1,1),(1,2),(2,2),(3,1),(3,3),(4,1)})
