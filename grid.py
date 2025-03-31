@@ -90,7 +90,7 @@ class GridWorld(GridWorldBase):
     def get_reward(self, state, next_state, action):
         #奖励函数 边界惩罚
         i, j = state
-
+        """
         # 检查是否触碰边界
         is_boundary_hit = False
         if action == 'up' and i == 0:  # 向上触碰上边界
@@ -101,12 +101,10 @@ class GridWorld(GridWorldBase):
             is_boundary_hit = True
         elif action == 'right' and j == self.cols - 1:  # 向右触碰右边界
             is_boundary_hit = True
-
+        """
         # 计算奖励
         if next_state in self.terminal_states:
             return 1  # 到达终止状态
-        elif is_boundary_hit:
-            return -1  # 触碰边界惩罚
         else:
             return 0  # 其他情况
 
