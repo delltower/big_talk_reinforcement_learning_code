@@ -1,5 +1,7 @@
 import numpy as np
-from grid import GridWorldV2,GridWorldV3,action2icon
+from grid import GridWorld,GridWorldV3,action2icon
+from vi5 import visualStateValue,visualDelta
+
 def transPolicy(policy):
     policy_new = policy.copy()
     for i in range(len(policy)):
@@ -68,7 +70,11 @@ def policy_iteration(grid, theta=1e-4, max_iter=1000):
         print("Value Function:\n", np.round(V, 2))
         # 策略改进
         new_policy = policy_improvement(grid, V)
-        print("Policy:\n", transPolicy(new_policy))
+        visualPolicy = transPolicy(new_policy)
+        print("Policy:\n", visualPolicy)
+        title = f"Iter={iter}"
+        path = f"D:\\bak\github\\big_talk_blog\policy_iter_algo\imgs\grid_v3_{iter}.png"
+        visualStateValue(V, visualPolicy, grid.terminal_states, grid.forbid_states, title=title, savePath=path)
         # 检查策略是否稳定
         if np.array_equal(new_policy, policy):
             break
@@ -81,11 +87,13 @@ if __name__ == "__main__":
     #terminal_states = {(3, 2)}
     #forbid_states = {}
     #grid = GridWorld(rows=5,cols=5,terminal_states=terminal_states, gamma=0.9)
+
     #带有随机奖励的网格
     #grid = GridWorldV2(terminal_states={(2, 2)}, gamma=0.9)
+
+    # 带有禁止区域的网格世界
     terminal_states = {(3, 2)}
     forbid_states = {(1, 1), (1, 2), (2, 2), (3, 1), (3, 3), (4, 1)}
-    #带有禁止区域的网格世界
     grid = GridWorldV3(rows=5,cols=5,terminal_states=terminal_states, forbid_states=forbid_states,gamma=0.9)
 
     # 运行策略迭代算法

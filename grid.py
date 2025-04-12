@@ -84,8 +84,8 @@ class GridWorldBase:
 
 class GridWorld(GridWorldBase):
     #没有边界检测、禁止区域和随机奖励
-    def __init__(self, rows=3, cols=3, terminal_states=None, gamma=0.9):
-        super().__init__(rows, cols, terminal_states, gamma)
+    def __init__(self, rows=3, cols=3, terminal_states=None, forbid_states=None, gamma=0.9):
+        super().__init__(rows, cols, terminal_states, forbid_states, gamma)
 
     def get_reward(self, state, next_state, action):
         # 计算奖励
@@ -127,7 +127,7 @@ class GridWorldV3(GridWorldBase):
 
 class GridWorldV2(GridWorldBase):
     #增加随机奖励
-    def __init__(self, rows=3, cols=3, terminal_states=None, gamma=0.9, randomness=0.1):
+    def __init__(self, rows=3, cols=3, terminal_states=None,gamma=0.9, randomness=0.1):
         super().__init__(rows, cols, terminal_states, gamma=gamma)
         self.randomness = randomness
 
